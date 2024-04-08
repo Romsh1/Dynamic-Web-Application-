@@ -4,17 +4,18 @@ April 7, 2024 */
 
 body {
     font-family: 'Roboto', sans-serif;
+    color: #1e1e1e;
 }
 
 .banner {
     background-color: rgb(228, 157, 157);
     margin: 0;
     text-align: center;
+    
 }
 
 
 .container {
-    color: #fff;
     padding: 2rem;
     width: 40%;
     margin: 4rem auto;
@@ -31,13 +32,11 @@ body {
 input {
     border: 0.5px solid white;
     outline: none;
-    color: #fff;
     padding: 0.5rem 2.5rem;
     border-radius: 20px;
 }
 
 input::placeholder {
-    color: #fff;
 }
 
 /* CSS Rules for search icon button*/
@@ -61,7 +60,6 @@ input::placeholder {
     left: 10px;
     top: 10px;
     font-size: 15px;
-    color: #fff;
 }
 
 /* CSS Rules for displaying temperature in degree celcius and degree fahrenheit */
@@ -125,7 +123,6 @@ input::placeholder {
 .card_weather {
     display: flex;
     align-items: center;
-    background: #1e1e1e;
     padding: 1rem;
     border-radius: 10px;
     border: 0.5px solid white;
