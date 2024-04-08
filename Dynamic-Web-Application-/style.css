@@ -1,0 +1,13 @@
+/* Romika Chaudhary
+C0921918
+April 7, 2024 */
+
+body {
+    font-family: 'Roboto', sans-serif;
+}
+
+.banner {
+    background-color: rgb(228, 157, 157);
+    margin: 0;
+    text-align: center;
+}
