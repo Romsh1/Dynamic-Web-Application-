@@ -2,6 +2,27 @@
 // C0921918
 // April 7, 2024
 
+//For Unsplash picture
+const API_KEY = 'b0bd8bbd5f515361fdc416b758befdc5';
+
+let picSearch = document.getElementById('picButton');
+let placeImage = document.getElementById('placeImage');
+
+picSearch.addEventListener('submit', e => {
+    getPhotos();
+});
+
+function getPhotos() {
+    fetch('https://unsplash.com/search/photos?query=minimal').
+    then(res => res.json())
+    .then(data => {
+        console.log(data);
+    });
+}
+
+
+
+//For Weather API
 //Declaring current city and units
 let curr_city = "Sarnia";
 let units = "metric";
