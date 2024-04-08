@@ -11,3 +11,187 @@ body {
     margin: 0;
     text-align: center;
 }
+
+/* Romika Chaudhary
+Feb 22, 2024
+File Name: style.css */
+
+body{
+    font-family: "Raleway", sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background-color: #1e1e1e;
+}
+
+.container {
+    background-color: black;
+    color: #fff;
+    padding: 2rem;
+    width: 40%;
+    margin: 4rem auto;
+    border-radius: 10px;
+}
+
+.app-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* CSS Rules for user input*/
+input {
+    border: 0.5px solid white;
+    background: #1e1e1e;
+    outline: none;
+    color: #fff;
+    padding: 0.5rem 2.5rem;
+    border-radius: 20px;
+}
+
+input::placeholder {
+    color: #fff;
+}
+
+/* CSS Rules for search icon button*/
+.icon-button {
+    border: none;
+    background: none;
+    cursor: pointer;
+}
+  
+.icon-button i {
+    font-size: 24px;
+    color: #000; 
+}
+ 
+/* CSS Rules for search form*/
+.search-weather {
+    position: relative;
+}
+
+.search-weather i {
+    position: absolute;
+    left: 10px;
+    top: 10px;
+    font-size: 15px;
+    color: #fff;
+}
+
+/* CSS Rules for displaying temperature in degree celcius and degree fahrenheit */
+.weather_temp {
+    font-size: 1.5rem;
+}
+
+.weather_temp span {
+    cursor: pointer;
+}
+
+.weather_temp span:first-child {
+    margin-right: 0.5rem;
+}
+
+.weather_whole {
+    text-align: center;
+    margin-top: 3rem;
+}
+
+.weather_dateNtime {
+    margin-bottom: 0.5rem;
+    font-size: 14px;
+}
+
+/* CSS Rules for displaying whether the climate is clear, cloudy or rainy */
+.forecast_weather {
+    display: inline-block;
+    font-size: 20px;
+}
+
+.icon_weather img {
+    width: 100px;
+    margin-bottom: -20px;
+}
+
+.weather_temperature {
+    font-size: 2.75rem;
+}
+
+/* CSS Rules for min and max temperature*/
+.minMax_weather {
+    display: flex;
+    justify-content: center;
+    margin-top: -20px;
+}
+
+.minMax_weather p {
+    font-size: 1rem;
+    margin: 0%;
+}
+
+.information_weather{
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    grid-gap: 1rem;
+    margin-top: 3rem;
+}
+
+/* CSS Rules for cards*/
+.card_weather {
+    display: flex;
+    align-items: center;
+    background: #1e1e1e;
+    padding: 1rem;
+    border-radius: 10px;
+    border: 0.5px solid white;
+}
+
+.card_weather i {
+    font-size: 1.5rem;
+    margin-left: 1rem;
+}
+
+.card_weather p {
+    font-size: 14px;
+}
+
+/* CSS Rules for displaying Feels like, humidity, wind and pressure*/
+.weather_feels_like {
+    margin: 7px;
+}
+
+.weather_humidity {
+    margin: 7px;
+}
+
+.weather_wind {
+    margin: 7px;
+}
+
+.weather_gauge {
+    margin: 7px;
+}
+
+.weather_wind {
+    position: relative;
+}
+
+/* CSS Rules for making screen responsive*/
+@media(max-width: 936px){
+    .container{
+        width: 90%;
+    }
+
+    .app-title {
+        flex-direction: column;
+    }
+
+    .weather_temp  {
+        margin-top: 1rem;
+    }
+}
+
+@media(max-width:400px){
+    .information_weather {
+        grid-template-columns: none;
+    }
+}
