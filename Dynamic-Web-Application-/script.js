@@ -19,34 +19,35 @@ myBtn.addEventListener('submit', e => {
     //Using the search input value and trim whitespace
     let picSearch = searchInput.value.trim(); 
     if (picSearch === "") {
-        // Display an alert if the search term is empty
+        //Displaying an alert if the search box is empty
         alert("Please enter a search term."); 
-        return; // Exit the function early if the search term is empty
+        //Exitting the function early if the search term is empty
+        return; 
     }
     getPhotos(picSearch);
-    searchInput.value = ""; // Clear the search input after submitting the form
+    //Clearing the search input after submitting the form
+    searchInput.value = ""; 
 });
 
-// Function to fetch and display images
+//Function to fetch and display images
 function getPhotos(picSearch) {
     fetch(`${URL}${picSearch}&client_id=${API_KEY}`) // Updated the URL construction
     .then(res => res.json())
     .then(data => {
         console.log(data);
-        body.style.backgroundImage = `url(${data.results[0].urls.regular})`; // Displaying the first image from the results
-        // setBackgroundImage(imageUrl); // Call function to set background image
-  
+        //Displaying the first image from the results  
+        // body.style.backgroundImage = `url(${data.results[0].urls.regular})`; 
+        if (data.results.length > 0) {
+            body.style.backgroundImage = `url(${data.results[0].urls.regular})`;
+        }
+        else {
+            console.error('No images found for the search item.');
+        }
     })
     .catch(error => {
         console.error('Error fetching data:', error);
     });
 }
-
-//Function to set background image
-// function setBackgroundImage(url) {
-//     backgroundImageContainer.style.backgroundImage = `url(${url})`; // Set background image
-// }
-
 
 
 
