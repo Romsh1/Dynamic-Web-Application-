@@ -2,20 +2,29 @@
 // C0921918
 // April 7, 2024
 
-//For Unsplash picture
+//URL and API Key for accessing Unsplash picture
 const API_KEY = '-yVHnIeirZXQo-y9wMRmv11KgXqtuCYWNCH_euSYfPQ';
 const URL = `https://api.unsplash.com/search/photos?query=`;
 
-// Accessing the necessary elements
+//Accessing the necessary elements
 let searchBtn = document.getElementById('picButton');
 let placeImage = document.getElementById('placeImage');
+let searchInput = document.getElementById('picSearch'); 
+const body = document.querySelector("body");
+const myBtn = document.querySelector('.myForm');
 
-// Event listener for form submission
-document.querySelector('.myForm').addEventListener('submit', e => {
+//Event listener for form submission
+myBtn.addEventListener('submit', e => {
     e.preventDefault();
-    let picSearch = document.getElementById('picSearch').value; // Fixed the id selector here
+    //Using the search input value and trim whitespace
+    let picSearch = searchInput.value.trim(); 
+    if (picSearch === "") {
+        // Display an alert if the search term is empty
+        alert("Please enter a search term."); 
+        return; // Exit the function early if the search term is empty
+    }
     getPhotos(picSearch);
-    // picSearch.value = "";
+    searchInput.value = ""; // Clear the search input after submitting the form
 });
 
 // Function to fetch and display images
@@ -24,12 +33,19 @@ function getPhotos(picSearch) {
     .then(res => res.json())
     .then(data => {
         console.log(data);
-        placeImage.src = data.results[0].urls.regular; // Displaying the first image from the results
+        body.style.backgroundImage = `url(${data.results[0].urls.regular})`; // Displaying the first image from the results
+        // setBackgroundImage(imageUrl); // Call function to set background image
+  
     })
     .catch(error => {
         console.error('Error fetching data:', error);
     });
 }
+
+//Function to set background image
+// function setBackgroundImage(url) {
+//     backgroundImageContainer.style.backgroundImage = `url(${url})`; // Set background image
+// }
 
 
 
