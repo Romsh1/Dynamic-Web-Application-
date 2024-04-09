@@ -4,28 +4,32 @@
 
 //For Unsplash picture
 const API_KEY = '-yVHnIeirZXQo-y9wMRmv11KgXqtuCYWNCH_euSYfPQ';
+const URL = `https://api.unsplash.com/search/photos?query=`;
 
-let picSearch = document.getElementById('picButton');
+// Accessing the necessary elements
 let searchBtn = document.getElementById('picButton');
 let placeImage = document.getElementById('placeImage');
-let curr_image = "Bear";
 
-searchBtn.addEventListener('submit', e => {
-    curr_image = picSearch.value;
+// Event listener for form submission
+document.querySelector('.myForm').addEventListener('submit', e => {
     e.preventDefault();
-    picSearch.value="";
+    let picSearch = document.getElementById('picSearch').value; // Fixed the id selector here
+    getPhotos(picSearch);
+    // picSearch.value = "";
 });
 
-function getPhotos() {
-    fetch(`https://api.unsplash.com/search/photos?query=${curr_image}&client_id=${API_KEY}`).
-    then(res => res.json())
+// Function to fetch and display images
+function getPhotos(picSearch) {
+    fetch(`${URL}${picSearch}&client_id=${API_KEY}`) // Updated the URL construction
+    .then(res => res.json())
     .then(data => {
-        placeImage.src = data.results[0].urls.regular;
         console.log(data);
-
+        placeImage.src = data.results[0].urls.regular; // Displaying the first image from the results
+    })
+    .catch(error => {
+        console.error('Error fetching data:', error);
     });
 }
-getPhotos();
 
 
 
