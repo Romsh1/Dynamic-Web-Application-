@@ -8,7 +8,7 @@ const API_KEY = '-yVHnIeirZXQo-y9wMRmv11KgXqtuCYWNCH_euSYfPQ';
 let picSearch = document.getElementById('picButton');
 let searchBtn = document.getElementById('picButton');
 let placeImage = document.getElementById('placeImage');
-let curr_image = "Space";
+let curr_image = "Bear";
 
 searchBtn.addEventListener('submit', e => {
     curr_image = picSearch.value;
