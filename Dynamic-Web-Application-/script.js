@@ -87,7 +87,6 @@ setInterval(() => {
 }, 2000); 
 
 
-//For Weather API
 //Declaring current city and units
 let curr_city = "Sarnia";
 let units = "metric";
@@ -179,7 +178,6 @@ function updateDateTime() {
 // Call the updateDateTime function when the page loads
 document.addEventListener('DOMContentLoaded', updateDateTime);
 
-
 //Main function with API call
 function getWeather() {
     const API_KEY = 'b0bd8bbd5f515361fdc416b758befdc5';
@@ -203,11 +201,6 @@ function getWeather() {
         console.log(data);
         //Processing the received data
         city.innerHTML = `${data.name}, ${convertCountryCode(data.sys.country)}`;
-        
-        //Passing timezone offset to updateDateTime function
-        updateDateTime(data.timezone);
-
-        //Updating other weather details
         dateTime.innerHTML = convertTimeStamp(data.dt, data.timezone);
         weatherForecast.innerHTML = `<p>${data.weather[0].main}</p>`;
         weatherTemperature.innerHTML = `${data.main.temp.toFixed()}${units === "imperial" ? "&#176F" : "&#176C"}`;
@@ -231,3 +224,6 @@ function getWeather() {
         loadStatus.style.display = 'none';
     });
 }
+
+//After the doc will be fully loaded and parsed, getWeather() function will be called
+document.addEventListener("DOMContentLoaded", getWeather);

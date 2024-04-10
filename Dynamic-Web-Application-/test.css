@@ -17,12 +17,13 @@ body {
 
 .banner h2 {
     margin: 0; 
-    font-size: 24px; 
+    font-size: 30px; 
 }
 
-.banner p {
+.banner h5, h5 {
     margin: 10px 0; 
     font-size: 16px;
+    margin-top: 30px;
 }
 
 .picture-display {
@@ -70,12 +71,11 @@ body {
 .weather-container {
     background-color: #333; 
     padding: 10px; 
-    margin-bottom: 40px; 
     border-radius: 15px; 
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); 
     width: 75%; 
     min-width: 300px; 
-    margin: 0 auto; 
+    margin: 0 auto 10px; 
 }
 
 .weather_searchForm, .picClass {
@@ -106,10 +106,16 @@ input {
 }
 
 /* CSS Rules for search icon button*/
+/* CSS Rules for search icon button*/
 .icon-button {
-    background: none;
     border: none;
+    background: none;
     cursor: pointer;
+}
+  
+.icon-button i {
+    font-size: 24px;
+    color: #000; 
 }
 
 
@@ -124,6 +130,16 @@ input {
     top: 10px;
     font-size: 15px;
     color: #fff;
+}
+
+.weather_searchForm, .picClass {
+    border-radius: 25px;
+}
+
+.unsplash form{
+    display: flex;
+    margin: auto;
+    align-items: center;
 }
 
 /* CSS Rules for displaying temperature in degree celcius and degree fahrenheit */
@@ -146,7 +162,7 @@ input {
 
 .weather_dateNtime {
     margin-bottom: 0.5rem;
-    font-size: 14px;
+    font-size: 1.2rem;
 }
 
 /* CSS Rules for displaying whether the climate is clear, cloudy or rainy */
@@ -161,7 +177,7 @@ input {
 }
 
 .weather_temperature {
-    font-size: 2.75rem;
+    font-size: 1.75rem;
 }
 
 /* CSS Rules for min and max temperature*/
