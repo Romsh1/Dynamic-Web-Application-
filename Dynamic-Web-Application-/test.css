@@ -1,4 +1,7 @@
-/* Romika Chaudhary C0921918 April 7, 2024 */
+/* Romika Chaudhary 
+    C0921918 
+    April 7, 2024
+*/
 
 body {
     font-family: 'Roboto', sans-serif;
@@ -26,7 +29,7 @@ body {
     margin-top: 30px;
 }
 
-.picture-display {
+/* .picture-display {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -49,7 +52,53 @@ body {
     width: 100%;
     height: 100%;
     object-fit: cover;
+} */
+
+/* .picture-display {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #333; 
+    padding: 10px; 
+    margin-bottom: 40px; 
+    border-radius: 15px; 
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); 
+    width: 75%; 
+    min-width: 300px; 
+    height: 500px;
+    margin: 0 auto; 
+    overflow: hidden; 
 }
+
+.picture-display img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+} */
+
+.picture-display {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #333; 
+    padding: 10px; 
+    margin-bottom: 40px; 
+    border-radius: 15px; 
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); 
+    width: 75%; 
+    min-width: 300px; 
+    min-height: 300px;
+    margin: 0 auto; 
+    overflow: hidden; 
+}
+
+.picture-display img {
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+}
+
 
 
 .search-container {
@@ -62,7 +111,15 @@ body {
     align-items: center;
 }
 
-.unsplash,
+.unsplash {
+    background-color: #333; 
+    padding: 10px; 
+    border-radius: 15px; 
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); 
+    max-width: fit-content;
+    margin: 0 auto 10px;
+}
+
 .weather-container {
     background-color: #333; 
     padding: 10px; 
@@ -73,10 +130,10 @@ body {
     margin: 0 auto 10px; 
 }
 
-.weather_searchForm, .picClass {
+/* .weather_searchForm, .picClass {
     align-items: center;
     margin: auto;
-}
+} */
 
 .container {
     padding: 1rem;
@@ -87,21 +144,6 @@ body {
     margin: 0 auto; 
 }
 
-/* .app-title {
-    margin-bottom: 1rem;
-} */
-
-/*CSS Rules for Search*/
-.myForm h2 {
-    font-size: large;
-    margin-left:40px;
-}
-
-.search-weather h2 {
-    font-size: large;
-    margin-left:40px;
-}
-
 /* CSS Rules for user input*/
 input {
     border: 1px solid #ccc; 
@@ -110,19 +152,6 @@ input {
     color: #fff; 
     padding: 0.5rem; 
 }
-
-/* CSS Rules for search icon button*/
-.icon-button {
-    border: none;
-    background: none;
-    cursor: pointer;
-}
-  
-.icon-button i {
-    font-size: 24px;
-    color: #000; 
-}
-
 
 /* CSS Rules for search form*/
 .search-weather {
@@ -137,10 +166,45 @@ input {
     color: #fff;
 }
 
-.weather_searchForm, .picClass {
+/*CSS Rules for Search*/
+.myForm h2 {
+    font-size: large;
+    /* margin-left: 60px; */
+}
+
+.search-weather h2 {
+    font-size: large;
+    /* margin-left:60px; */
+}
+
+#picButton {
+    margin-left: 20px;
+    padding: 7px;
+    border-radius: 12px;
+    width: 80px;
+}
+
+#weatherButton {
+    margin-left: 17px;
+    padding: 7px;
+    border-radius: 12px;
+    width: 80px;
+}
+
+.picClass {
     border-radius: 25px;
     margin-bottom: 10px;
-    width: 300px;
+    margin-top: 5px;
+    max-width: 400px;
+    margin-left: 35px;
+}
+
+.weather_searchForm {
+    border-radius: 25px;
+    margin-bottom: 10px;
+    margin-top: 5px;
+    max-width: 400px;
+    margin-left: 30px;
 }
 
 .unsplash form{
