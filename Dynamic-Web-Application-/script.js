@@ -17,22 +17,45 @@ const myBtn = document.querySelector('.myForm');
 let curr_category = "hill";
 
 //Function to fetch and display images
+// function getPhotos(picSearch) {
+//     fetch(`${URL}${picSearch}&&count=99&client_id=${API_KEY}`) 
+//     .then(res => res.json())
+//     .then(data => {
+//         console.log(data);
+//         if (data.results.length > 0) {
+//             let randNumber = Math.floor(Math.random() * data.results.length);
+//             const imageUrl = data.results[randNumber].urls.regular;
+//             //Setting the src attribute of the img element
+//             placeImage.src = imageUrl; 
+//         } else {
+//             console.error('No images found for the search item.');
+//         }
+//     })
+//     .catch(error => {
+//         console.error('Error fetching data:', error);
+//     });
+// }
+
+//Function to fetch and display images
 function getPhotos(picSearch) {
-    fetch(`${URL}${picSearch}&&count=99&client_id=${API_KEY}`) 
-    .then(res => res.json())
-    .then(data => {
-        console.log(data);
-        if (data.results.length > 0) {
-            let randNumber = Math.floor(Math.random() * data.results.length);
-            const imageUrl = data.results[randNumber].urls.regular;
-            //Setting the src attribute of the img element
-            placeImage.src = imageUrl; 
-        } else {
-            console.error('No images found for the search item.');
+    $.ajax({
+        url: `${URL}${picSearch}&&count=99&client_id=${API_KEY}`,
+        method: 'GET',
+        dataType: 'json',
+        success: function(data) {
+            console.log(data);
+            if (data.results.length > 0) {
+                let randNumber = Math.floor(Math.random() * data.results.length);
+                const imageUrl = data.results[randNumber].urls.regular;
+                //Setting the src attribute of the img element
+                $('#placeImage').attr('src', imageUrl); 
+            } else {
+                console.error('No images found for the search item.');
+            }
+        },
+        error: function(xhr, status, error) {
+            console.error('Error fetching data:', error);
         }
-    })
-    .catch(error => {
-        console.error('Error fetching data:', error);
     });
 }
 

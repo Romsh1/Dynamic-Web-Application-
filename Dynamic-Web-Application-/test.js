@@ -40,6 +40,7 @@ function getPhotos(picSearch) {
 }
 
 
+
 //Event listener for form submission
 $(document).ready(function() {
     $('#myBtn').on('submit', function(e) {
