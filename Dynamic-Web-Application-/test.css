@@ -2,8 +2,8 @@
 
 body {
     font-family: 'Roboto', sans-serif;
-    color: #fff; /* Text color changed to white */
-    background-color: #222; /* Dark gray background color */
+    color: #fff; 
+    background-color: #222; 
 }
 
 .banner {
@@ -43,11 +43,6 @@ body {
 }
 
 .picture-display img {
-    /* max-width: 100%; 
-    max-height: 100%; 
-    display: block; 
-    margin: auto; 
-    object-fit: cover; */
     position:static;
     top: 0;
     left: 0;
@@ -85,27 +80,37 @@ body {
 
 .container {
     padding: 1rem;
-    border-radius: 5px; /* Reduced border radius */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Reduced box shadow */
-    width: 75%; /* Set width to 75% of viewport width */
-    min-width: 300px; /* Set minimum width to 300px */
-    margin: 0 auto; /* Center the element horizontally */
+    border-radius: 5px; 
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); 
+    width: 75%; 
+    min-width: 300px; 
+    margin: 0 auto; 
 }
 
-.app-title {
+/* .app-title {
     margin-bottom: 1rem;
+} */
+
+/*CSS Rules for Search*/
+.myForm h2 {
+    font-size: large;
+    margin-left:40px;
+}
+
+.search-weather h2 {
+    font-size: large;
+    margin-left:40px;
 }
 
 /* CSS Rules for user input*/
 input {
-    border: 1px solid #ccc; /* Light gray border color */
-    border-radius: 3px; /* Reduced border radius */
-    background-color: #444; /* Darker background color */
-    color: #fff; /* Text color changed to white */
-    padding: 0.5rem; /* Reduced padding */
+    border: 1px solid #ccc; 
+    border-radius: 3px; 
+    background-color: #444; 
+    color: #fff; 
+    padding: 0.5rem; 
 }
 
-/* CSS Rules for search icon button*/
 /* CSS Rules for search icon button*/
 .icon-button {
     border: none;
@@ -134,6 +139,8 @@ input {
 
 .weather_searchForm, .picClass {
     border-radius: 25px;
+    margin-bottom: 10px;
+    width: 300px;
 }
 
 .unsplash form{
@@ -240,10 +247,10 @@ input {
 }
 
 
-/* CSS Rules for making screen responsive*/
+/*CSS Rules for making screen responsive*/
 @media (max-width: 576px) {
     .banner, .container, .unsplash, .weather-container, .picture-display {
-        width: 90%; /* Adjusted width for smaller screens */
-        max-width: none; /* No maximum width for smaller screens */
+        width: 90%; 
+        max-width: none; 
     }
 }
