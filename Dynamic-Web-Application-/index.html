@@ -14,30 +14,39 @@ April 7, 2024 -->
     <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" 
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="banner">
-        <h2>Romika Chaudhary</h2>
-        <h2>&copy; Copyright 2024 Romika</h2>
-        <h2> 2024, C0921918</h2>    
+        <h2>DynamicScapes: A Fusion of Visuals and Weather</h2>
+        <h5>Romika Chaudhary | C0921918</h5>
+        <h6>&copy; Copyright 2024 Romika</h6>
     </div>
 
-    <div class="unsplashBg" id="backgroundImageContainer"></div>
+    <!-- <div class="unsplashBg" id="backgroundImageContainer"></div> -->
 
     <div class="unsplash">
         <form class="myForm">
-            <h2>Picture Search</h2>
-            <input type="text" id="picSearch" class="picClass" placeholder="Enter picture category">
+            <!-- <h2>Picture Search</h2> -->
+            <input type="text" id="picSearch" class="picClass" placeholder="Search for any picture">
             <button id="picButton" type="submit">Search</button>
-            <img id="placeImage" src=""/>
         </form>    
+        <form class="search-weather">
+            <!-- <h2>Weather Search</h2> -->
+            <input type="text"  
+                placeholder="Search for a city"
+                class="weather_searchForm">
+                <!-- <button class="icon-button">
+                    <i class="fas fa-magnifying-glass"></i>
+                </button> -->
+        </form>
     </div>
 
     <div class="weather-container">
         <div class="app-title">
-            <h2>Weather Search</h2>
+            <!-- <h2>Weather Search</h2>
             <form class="search-weather">
                 <input type="text"  
                     placeholder="Search for a city"
@@ -45,7 +54,7 @@ April 7, 2024 -->
                     <button class="icon-button">
                         <i class="fas fa-magnifying-glass"></i>
                     </button>
-              </form>
+              </form> -->
             <div class="weather_temp">
                 <span class="weather_temp_celcius">&#176C</span>
                 <span class="weather_temp_fahrenheit">&#176F</span>
@@ -101,6 +110,11 @@ April 7, 2024 -->
             </div>
         </div>
     </div>
+
+    <div class="picture-display" id="pictureDisplay">
+        <img id="placeImage" src=""/>
+    </div>
+
 
     <script src="https://kit.fontawesome.com/a692e1c39f.js" crossorigin="anonymous"></script>
     <script src="script4.js"></script>

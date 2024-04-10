@@ -11,7 +11,38 @@ let searchBtn = document.getElementById('picButton');
 let placeImage = document.getElementById('placeImage');
 let searchInput = document.getElementById('picSearch'); 
 const body = document.querySelector("body");
+const picDisplay = document.getElementById('pictureDisplay');
 const myBtn = document.querySelector('.myForm');
+
+//Predefined search terms/categories
+// const categories = ['Space', 'Adventure', 'Bears'];
+// let currentCategoryIndex = 0;
+
+//Function to fetch and display images
+function getPhotos(picSearch) {
+    fetch(`${URL}${picSearch}&&count=99&client_id=${API_KEY}`) // Updated the URL construction
+    .then(res => res.json())
+    .then(data => {
+        console.log(data);
+        //Displaying the first image from the results  
+        // body.style.backgroundImage = `url(${data.results[0].urls.regular})`; 
+        // if (data.results.length > 0) {
+        //     placeImage.innerHTML = `url(${data.results[0].urls.regular})`;
+        // }
+        // else {
+        //     console.error('No images found for the search item.');
+        // }
+        if (data.results.length > 0) {
+            const imageUrl = data.results[0].urls.regular;
+            placeImage.src = imageUrl; // Set the src attribute of the img element
+        } else {
+            console.error('No images found for the search item.');
+        }
+    })
+    .catch(error => {
+        console.error('Error fetching data:', error);
+    });
+}
 
 //Event listener for form submission
 myBtn.addEventListener('submit', e => {
@@ -29,25 +60,11 @@ myBtn.addEventListener('submit', e => {
     searchInput.value = ""; 
 });
 
-//Function to fetch and display images
-function getPhotos(picSearch) {
-    fetch(`${URL}${picSearch}&client_id=${API_KEY}`) // Updated the URL construction
-    .then(res => res.json())
-    .then(data => {
-        console.log(data);
-        //Displaying the first image from the results  
-        // body.style.backgroundImage = `url(${data.results[0].urls.regular})`; 
-        if (data.results.length > 0) {
-            body.style.backgroundImage = `url(${data.results[0].urls.regular})`;
-        }
-        else {
-            console.error('No images found for the search item.');
-        }
-    })
-    .catch(error => {
-        console.error('Error fetching data:', error);
-    });
-}
+//Initial call to fetch and display images
+getPhotos();
+
+//Refreshing images every 20 seconds
+setInterval(getPhotos, 2000);
 
 
 
@@ -132,49 +149,18 @@ function convertCountryCode(country) {
     return regionNames.of(country);
 }
 
-// // Function to update date and time every second
-// function updateDateTime(timezoneOffset) {
-//     const datetimeDiv = document.querySelector('.weather_dateNtime');
-//     setInterval(() => {
-//         const now = new Date();
-//         // Adjust time according to timezone offset
-//         const localTime = new Date(now.getTime() + timezoneOffset * 1000);
-//         datetimeDiv.innerHTML = localTime.toLocaleString();
-//     }, 1000);
-// }
-
-//Declaring datetimeInterval globally
-let datetimeInterval;
-
 //Function to update date and time every second
-function updateDateTime(timezoneOffset) {
+function updateDateTime() {
     const datetimeDiv = document.querySelector('.weather_dateNtime');
-    //Clearing previous interval if exists
-    clearInterval(datetimeInterval); 
-    datetimeInterval = setInterval(() => {
+    setInterval(() => {
         const now = new Date();
-        //Adjustting time according to timezone offset
-        const localTime = new Date(now.getTime() + timezoneOffset * 1000);
-        //Formatting date and time manually to ensure consistency
-        const options = {
-            weekday: "long",
-            year: "numeric",
-            month: "long",
-            day: "numeric",
-            hour: "numeric",
-            minute: "numeric",
-            hour12: true // Use 12-hour format
-        };
-        datetimeDiv.innerHTML = localTime.toLocaleString("en-US", options);
+        datetimeDiv.innerHTML = now.toLocaleString();
     }, 1000);
 }
 
-
 // Call the updateDateTime function when the page loads
-document.addEventListener('DOMContentLoaded', () => {
-    //Fetch initial weather data to get timezone information
-    getWeather(); //Fetch initial weather data to get timezone information
-});
+document.addEventListener('DOMContentLoaded', updateDateTime);
+
 
 //Main function with API call
 function getWeather() {
