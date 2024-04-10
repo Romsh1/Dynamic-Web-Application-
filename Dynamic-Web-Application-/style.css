@@ -7,23 +7,47 @@ body {
 }
 
 .banner {
-    background-color: #333; /* Dark gray background color */
-    color: #fff; /* Text color changed to white */
+    background-color: #333; 
+    color: #fff; 
     padding: 20px;
     margin-bottom: 20px;
-    text-align: center; /* Align text to the center */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Add a subtle box shadow */
+    text-align: center; 
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); 
 }
 
 .banner h2 {
-    margin: 0; /* Remove default margin for h2 elements */
-    font-size: 24px; /* Set font size */
+    margin: 0; 
+    font-size: 24px; 
 }
 
 .banner p {
-    margin: 10px 0; /* Set margin for paragraphs */
-    font-size: 16px; /* Set font size */
+    margin: 10px 0; 
+    font-size: 16px;
 }
+
+.picture-display {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #333; 
+    padding: 10px; 
+    margin-bottom: 40px; 
+    border-radius: 15px; 
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); 
+    width: 75%; 
+    min-width: 300px; 
+    height: 500px;
+    margin: 0 auto; 
+    overflow: hidden; 
+}
+
+.picture-display img {
+    max-width: 100%; /* Set maximum width to fill the container */
+    max-height: 100%; /* Set maximum height to fill the container */
+    display: block; 
+    margin: auto; 
+}
+
 
 .search-container {
     margin-bottom: 20px;
@@ -40,7 +64,7 @@ body {
     background-color: #333; 
     padding: 10px; 
     margin-bottom: 40px; 
-    border-radius: 5px; 
+    border-radius: 15px; 
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); 
     width: 75%; 
     min-width: 300px; 
@@ -152,7 +176,7 @@ input {
     margin: 5px; /* Adjusted margin */
 }
 
-#pictureDisplay {
+/* #pictureDisplay {
     background-color: #333; 
     padding: 10px; 
     margin-bottom: 40px; 
@@ -161,7 +185,8 @@ input {
     width: 75%; 
     min-width: 300px; 
     margin: 0 auto; 
-}
+
+} */
 
 
 
