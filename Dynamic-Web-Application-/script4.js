@@ -14,9 +14,7 @@ const body = document.querySelector("body");
 const picDisplay = document.getElementById('pictureDisplay');
 const myBtn = document.querySelector('.myForm');
 
-//Predefined search terms/categories
-// const categories = ['Space', 'Adventure', 'Bears'];
-// let currentCategoryIndex = 0;
+let curr_category = "hill";
 
 //Function to fetch and display images
 function getPhotos(picSearch) {
@@ -24,16 +22,9 @@ function getPhotos(picSearch) {
     .then(res => res.json())
     .then(data => {
         console.log(data);
-        //Displaying the first image from the results  
-        // body.style.backgroundImage = `url(${data.results[0].urls.regular})`; 
-        // if (data.results.length > 0) {
-        //     placeImage.innerHTML = `url(${data.results[0].urls.regular})`;
-        // }
-        // else {
-        //     console.error('No images found for the search item.');
-        // }
         if (data.results.length > 0) {
-            const imageUrl = data.results[0].urls.regular;
+            let randNumber = Math.floor(Math.random() * data.results.length);
+            const imageUrl = data.results[randNumber].urls.regular;
             placeImage.src = imageUrl; // Set the src attribute of the img element
         } else {
             console.error('No images found for the search item.');
@@ -43,6 +34,7 @@ function getPhotos(picSearch) {
         console.error('Error fetching data:', error);
     });
 }
+
 
 //Event listener for form submission
 myBtn.addEventListener('submit', e => {
@@ -55,6 +47,7 @@ myBtn.addEventListener('submit', e => {
         //Exitting the function early if the search term is empty
         return; 
     }
+    curr_category = picSearch;
     getPhotos(picSearch);
     //Clearing the search input after submitting the form
     searchInput.value = ""; 
@@ -64,9 +57,9 @@ myBtn.addEventListener('submit', e => {
 getPhotos();
 
 //Refreshing images every 20 seconds
-setInterval(getPhotos, 2000);
-
-
+setInterval(() => {
+    getPhotos(picSearch);
+}, 2000); 
 
 
 //For Weather API
