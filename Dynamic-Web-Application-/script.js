@@ -14,7 +14,7 @@ const body = document.querySelector("body");
 const picDisplay = document.getElementById('pictureDisplay');
 const myBtn = document.querySelector('.myForm');
 
-let curr_category = "hill";
+let curr_category = "Jeep";
 
 //Function to fetch and display images
 // function getPhotos(picSearch) {
@@ -104,38 +104,30 @@ let weatherWind = document.querySelector(".weather_wind");
 let weatherPressure = document.querySelector(".weather_gauge");
 let loadStatus = document.querySelector(".loading");
 
-//Search functionality
-document.querySelector(".search-weather").addEventListener
-('submit', e => {
-    let search = document.querySelector(".weather_searchForm");
-    //Preventing default action
-    e.preventDefault();
-    //Changes current city according to the value entered
-    curr_city = search.value;
-    //Gets the weather forecast
-    getWeather();
-    //Clearing input text box after each search
-    search.value = "";
-})
-
-//Converting Celcius to Fahrenheit and Vice-Versa
-document.querySelector(".weather_temp_celcius").addEventListener
-('click', () => {
-    if(units !== "metric"){
-        //Changing to metric
-        units = "metric"
-        //Getting the weather forecast
+$(document).ready(function() {
+    // Search functionality
+    $(".search-weather").on('submit', function(e) {
+        e.preventDefault();
+        let search = $(".weather_searchForm").val();
+        curr_city = search;
         getWeather();
-    }
-})
+        $(".weather_searchForm").val("");
+    });
 
-document.querySelector(".weather_temp_fahrenheit").addEventListener
-('click', () => {
-    if(units !== "imperial"){
-        units = "imperial"
-        getWeather();
-    }
-})
+    // Convert temperature units
+    $(".weather_temp_celcius").on('click', function() {
+        if (units !== "metric") {
+            units = "metric";
+            getWeather();
+        }
+    });
+
+    $(".weather_temp_fahrenheit").on('click', function() {
+        if (units !== "imperial") {
+            units = "imperial";
+            getWeather();
+        }
+    });
 
 function convertTimeStamp(timestamp, timezone) {
     //Converting seconds to hour
@@ -165,64 +157,55 @@ function convertCountryCode(country) {
     return regionNames.of(country);
 }
 
-//Function to update date and time every second
-function updateDateTime() {
-    const datetimeDiv = document.querySelector('.weather_dateNtime');
-    setInterval(() => {
-        const now = new Date();
-        datetimeDiv.innerHTML = now.toLocaleString();
-    }, 1000);
-}
 
-// Call the updateDateTime function when the page loads
-document.addEventListener('DOMContentLoaded', updateDateTime);
-
-//Main function with API call
-function getWeather() {
-    const API_KEY = 'b0bd8bbd5f515361fdc416b758befdc5';
-    //Validation if user input for city is not entered
-    if(!curr_city){
-        alert("Please enter a city!");
-        return;
+    // Update date and time
+    function updateDateTime() {
+        const datetimeDiv = $('.weather_dateNtime');
+        setInterval(function() {
+            const now = new Date();
+            datetimeDiv.html(now.toLocaleString());
+        }, 1000);
     }
 
-    //Showing loading message
-    loadStatus.style.display = 'block';
+    // Call the updateDateTime function when the page loads
+    updateDateTime();
 
-    fetch(`https://api.openweathermap.org/data/2.5/weather?q=${curr_city}&appid=${API_KEY}&units=${units}`)
-    .then(res => {
-        if (!res.ok) {
-            throw new Error('City not found');
+    // Main function to fetch weather data
+    function getWeather() {
+        const API_KEY = 'b0bd8bbd5f515361fdc416b758befdc5';
+        if (!curr_city) {
+            curr_city = "Sarnia"; // Set default city
         }
-        return res.json();
-    })
-    .then(data => {
-        console.log(data);
-        //Processing the received data
-        city.innerHTML = `${data.name}, ${convertCountryCode(data.sys.country)}`;
-        dateTime.innerHTML = convertTimeStamp(data.dt, data.timezone);
-        weatherForecast.innerHTML = `<p>${data.weather[0].main}</p>`;
-        weatherTemperature.innerHTML = `${data.main.temp.toFixed()}${units === "imperial" ? "&#176F" : "&#176C"}`;
-        weatherIcon.innerHTML = `<img src="http://openweathermap.org/img/wn/${data.weather[0].icon}.png" alt="Weather Icon"/>`;
-        weatherMinMax.innerHTML = `<p>H: ${data.main.temp_min.toFixed()}&#176 </p>
-                                    <p>L: ${data.main.temp_max.toFixed()}&#176 </p>`;
-        weatherFeelsLike.innerHTML = `${data.main.feels_like.toFixed()}${units === "imperial" ? "&#176F" : "&#176C"}`;
-        weatherHumidity.innerHTML = `${data.main.humidity}%`;
-        weatherWind.innerHTML = `${data.wind.speed}${units === "imperial" ? "mph" : "m/s"}`;
-        weatherPressure.innerHTML = `${data.main.pressure}hpa`;
 
-        //Hiding loading message after data is fetched
-        loadStatus.style.display = 'none';
-    })
-    .catch(error => {
-        console.error('Error fetching weather data:', error);
-        if (error.message === 'City not found') {
-            alert("Invalid city name!");
-        }
-        //Hiding loading message in case of error
-        loadStatus.style.display = 'none';
-    });
-}
+        $('.loading').css('display', 'block');
 
-//After the doc will be fully loaded and parsed, getWeather() function will be called
-document.addEventListener("DOMContentLoaded", getWeather);
+        $.ajax({
+            url: `https://api.openweathermap.org/data/2.5/weather?q=${curr_city}&appid=${API_KEY}&units=${units}`,
+            method: 'GET',
+            success: function(data) {
+                console.log(data);
+                $(".weather_search_city").html(`${data.name}, ${convertCountryCode(data.sys.country)}`);
+                $(".weather_dateNtime").html(convertTimeStamp(data.dt, data.timezone));
+                $(".forecast_weather").html(`<p>${data.weather[0].main}</p>`);
+                $(".weather_temperature").html(`${data.main.temp.toFixed()}${units === "imperial" ? "&#176F" : "&#176C"}`);
+                $(".icon_weather").html(`<img src="http://openweathermap.org/img/wn/${data.weather[0].icon}.png" alt="Weather Icon"/>`);
+                $(".minMax_weather").html(`<p>H: ${data.main.temp_min.toFixed()}&#176 </p><p>L: ${data.main.temp_max.toFixed()}&#176 </p>`);
+                $(".weather_feels_like").html(`${data.main.feels_like.toFixed()}${units === "imperial" ? "&#176F" : "&#176C"}`);
+                $(".weather_humidity").html(`${data.main.humidity}%`);
+                $(".weather_wind").html(`${data.wind.speed}${units === "imperial" ? "mph" : "m/s"}`);
+                $(".weather_gauge").html(`${data.main.pressure}hpa`);
+                $('.loading').css('display', 'none');
+            },
+            error: function(xhr, status, error) {
+                console.error('Error fetching weather data:', error);
+                if (error.message === 'City not found') {
+                    alert("Invalid city name!");
+                }
+                $('.loading').css('display', 'none');
+            }
+        });
+    }
+
+    // Initial call to fetch default weather data
+    getWeather();
+});
