@@ -17,26 +17,6 @@ const myBtn = document.querySelector('.myForm');
 let curr_category = "hill";
 
 //Function to fetch and display images
-// function getPhotos(picSearch) {
-//     fetch(`${URL}${picSearch}&&count=99&client_id=${API_KEY}`) 
-//     .then(res => res.json())
-//     .then(data => {
-//         console.log(data);
-//         if (data.results.length > 0) {
-//             let randNumber = Math.floor(Math.random() * data.results.length);
-//             const imageUrl = data.results[randNumber].urls.regular;
-//             //Setting the src attribute of the img element
-//             placeImage.src = imageUrl; 
-//         } else {
-//             console.error('No images found for the search item.');
-//         }
-//     })
-//     .catch(error => {
-//         console.error('Error fetching data:', error);
-//     });
-// }
-
-//Function to fetch and display images
 function getPhotos(picSearch) {
     $.ajax({
         url: `${URL}${picSearch}&&count=99&client_id=${API_KEY}`,
@@ -81,7 +61,7 @@ $(document).ready(function() {
     // Refreshing images every 20 seconds
     setInterval(function() {
         getPhotos(curr_category);
-    }, 20000); // Note: 20000 milliseconds = 20 seconds
+    }, 20000); 
 });
 
 
@@ -102,100 +82,26 @@ let weatherWind = document.querySelector(".weather_wind");
 let weatherPressure = document.querySelector(".weather_gauge");
 let loadStatus = document.querySelector(".loading");
 
-// //Search functionality
-// document.querySelector(".search-weather").addEventListener
-// ('submit', e => {
-//     let search = document.querySelector(".weather_searchForm");
-//     //Preventing default action
-//     e.preventDefault();
-//     //Changes current city according to the value entered
-//     curr_city = search.value;
-//     //Gets the weather forecast
-//     getWeather();
-//     //Clearing input text box after each search
-//     search.value = "";
-// })
-
-// //Converting Celcius to Fahrenheit and Vice-Versa
-// document.querySelector(".weather_temp_celcius").addEventListener
-// ('click', () => {
-//     if(units !== "metric"){
-//         //Changing to metric
-//         units = "metric"
-//         //Getting the weather forecast
-//         getWeather();
-//     }
-// })
-
-// document.querySelector(".weather_temp_fahrenheit").addEventListener
-// ('click', () => {
-//     if(units !== "imperial"){
-//         units = "imperial"
-//         getWeather();
-//     }
-// })
-
-
-// function convertTimeStamp(timestamp, timezone) {
-//     //Converting seconds to hour
-//     const convertTimezone = timezone / 3600;
-
-//     const date = new Date(timestamp * 1000);
-
-//     const options = {
-//         weekday: "long",
-//         day: "numeric",
-//         month: "long",
-//         year: "numeric",
-//         hour: "numeric",
-//         minute: "numeric",
-//         //Setting the timezone for date formatting
-//         timeZone: `Etc/GMT${convertTimezone >= 0 ? "-" : "+"}${Math.abs(convertTimezone)}`,
-//         //Specifying to use 12 hour time format
-//         hour12: true,
-//     };
-//     return date.toLocaleString("en-US", options);
-// }
-
-// //Converting country code to Country name
-// function convertCountryCode(country) {
-//     let regionNames = new Intl.DisplayNames(["en"], { type: "region" });
-//     //Returns the display name of provided country codes
-//     return regionNames.of(country);
-// }
-
-// //Function to update date and time every second
-// function updateDateTime() {
-//     const datetimeDiv = document.querySelector('.weather_dateNtime');
-//     setInterval(() => {
-//         const now = new Date();
-//         datetimeDiv.innerHTML = now.toLocaleString();
-//     }, 1000);
-// }
-
-// // Call the updateDateTime function when the page loads
-// document.addEventListener('DOMContentLoaded', updateDateTime);
-
 $(document).ready(function() {
-    // Search functionality
+    //Search functionality
     $(".search-weather").on('submit', function(e) {
         let search = $(".weather_searchForm").val();
-        // Preventing default action
+        //Preventing default action
         e.preventDefault();
-        // Changes current city according to the value entered
+        //Changes current city according to the value entered
         curr_city = search;
-        // Gets the weather forecast
+        //Gets the weather forecast
         getWeather();
-        // Clearing input text box after each search
+        //Clearing input text box after each search
         $(".weather_searchForm").val("");
     });
 
-    // Converting Celcius to Fahrenheit and Vice-Versa
+    //Converting Celcius to Fahrenheit and Vice-Versa
     $(".weather_temp_celcius").on('click', function() {
         if (units !== "metric") {
-            // Changing to metric
+            //Changing to metric
             units = "metric";
-            // Getting the weather forecast
+            //Getting the weather forecast
             getWeather();
         }
     });
@@ -208,7 +114,7 @@ $(document).ready(function() {
     });
 
     function convertTimeStamp(timestamp, timezone) {
-        // Converting seconds to hour
+        //Converting seconds to hour
         const convertTimezone = timezone / 3600;
 
         const date = new Date(timestamp * 1000);
@@ -231,7 +137,7 @@ $(document).ready(function() {
     //Converting country code to Country name
     function convertCountryCode(country) {
         let regionNames = new Intl.DisplayNames(["en"], { type: "region" });
-        // Returns the display name of provided country codes
+        //Returning the displayed name of provided country codes
         return regionNames.of(country);
     }
 
@@ -251,13 +157,13 @@ $(document).ready(function() {
 
 function getWeather() {
     const API_KEY = 'b0bd8bbd5f515361fdc416b758befdc5';
-    // Validation if user input for city is not entered
+    //Validation if user input for city is not entered
     if (!curr_city) {
         alert("Please enter a city!");
         return;
     }
 
-    // Showing loading message
+    //Showing loading message
     $('.loadStatus').css('display', 'block');
 
     $.ajax({
@@ -265,7 +171,7 @@ function getWeather() {
         method: 'GET',
         success: function(data) {
             console.log(data);
-            // Processing the received data
+            //Processing the received data
             $('.city').html(`${data.name}, ${convertCountryCode(data.sys.country)}`);
             $('.dateTime').html(convertTimeStamp(data.dt, data.timezone));
             $('.weatherForecast').html(`<p>${data.weather[0].main}</p>`);
@@ -278,7 +184,7 @@ function getWeather() {
             $('.weatherWind').html(`${data.wind.speed}${units === "imperial" ? "mph" : "m/s"}`);
             $('.weatherPressure').html(`${data.main.pressure}hpa`);
 
-            // Hiding loading message after data is fetched
+            //Hiding loading message after data is fetched
             $('.loadStatus').css('display', 'none');
         },
         error: function(xhr, status, error) {
@@ -286,7 +192,7 @@ function getWeather() {
             if (error.message === 'City not found') {
                 alert("Invalid city name!");
             }
-            // Hiding loading message in case of error
+            //Hiding loading message in case of error
             $('.loadStatus').css('display', 'none');
         }
     });
