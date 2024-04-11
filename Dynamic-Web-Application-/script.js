@@ -14,27 +14,8 @@ const body = document.querySelector("body");
 const picDisplay = document.getElementById('pictureDisplay');
 const myBtn = document.querySelector('.myForm');
 
+//Setting up a category to display default image
 let curr_category = "Jeep";
-
-//Function to fetch and display images
-// function getPhotos(picSearch) {
-//     fetch(`${URL}${picSearch}&&count=99&client_id=${API_KEY}`) 
-//     .then(res => res.json())
-//     .then(data => {
-//         console.log(data);
-//         if (data.results.length > 0) {
-//             let randNumber = Math.floor(Math.random() * data.results.length);
-//             const imageUrl = data.results[randNumber].urls.regular;
-//             //Setting the src attribute of the img element
-//             placeImage.src = imageUrl; 
-//         } else {
-//             console.error('No images found for the search item.');
-//         }
-//     })
-//     .catch(error => {
-//         console.error('Error fetching data:', error);
-//     });
-// }
 
 //Function to fetch and display images using AJAX
 function getPhotos(picSearch) {
@@ -45,6 +26,7 @@ function getPhotos(picSearch) {
         success: function(data) {
             console.log(data);
             if (data.results.length > 0) {
+                //Generating random number to display pictures
                 let randNumber = Math.floor(Math.random() * data.results.length);
                 const imageUrl = data.results[randNumber].urls.regular;
                 //Setting the src attribute of the img element
@@ -78,15 +60,11 @@ myBtn.addEventListener('submit', e => {
 });
 
 //Initial call to fetch and display images
-// getPhotos();
-
-//Refreshing images every 20 seconds
-setInterval(() => {
-    getPhotos(curr_category);
-}, 2000); 
+//getPhotos();
 
 
-// Weather API
+
+//Weather API
 //Declaring current city and units
 let curr_city = "Sarnia";
 let units = "metric";
@@ -105,7 +83,7 @@ let weatherPressure = document.querySelector(".weather_gauge");
 let loadStatus = document.querySelector(".loading");
 
 $(document).ready(function() {
-    // Search functionality
+    //Search functionality
     $(".search-weather").on('submit', function(e) {
         e.preventDefault();
         let search = $(".weather_searchForm").val();
@@ -114,7 +92,7 @@ $(document).ready(function() {
         $(".weather_searchForm").val("");
     });
 
-    // Convert temperature units
+    //Converting temperature units
     $(".weather_temp_celcius").on('click', function() {
         if (units !== "metric") {
             units = "metric";
@@ -153,59 +131,76 @@ function convertTimeStamp(timestamp, timezone) {
 //Converting country code to Country name
 function convertCountryCode(country) {
     let regionNames = new Intl.DisplayNames(["en"], { type: "region" });
-    //Returns the display name of provided country codes
+    //Returning the display name of provided country codes
     return regionNames.of(country);
 }
 
+//Updating date and time
+function updateDateTime() {
+    const datetimeDiv = $('.weather_dateNtime');
+    setInterval(function() {
+        const now = new Date();
+        datetimeDiv.html(now.toLocaleString());
+    }, 1000);
+}    
 
-    // Update date and time
-    function updateDateTime() {
-        const datetimeDiv = $('.weather_dateNtime');
-        setInterval(function() {
-            const now = new Date();
-            datetimeDiv.html(now.toLocaleString());
-        }, 1000);
+//Calling the updateDateTime function when the page loads
+updateDateTime();
+
+//Main function to fetch weather data
+function getWeather() {
+    const API_KEY = 'b0bd8bbd5f515361fdc416b758befdc5';
+    if (!curr_city) {
+        //Setting default city
+        curr_city = "Sarnia"; 
     }
 
-    // Call the updateDateTime function when the page loads
-    updateDateTime();
+    $('.loading').css('display', 'block');
 
-    // Main function to fetch weather data
-    function getWeather() {
-        const API_KEY = 'b0bd8bbd5f515361fdc416b758befdc5';
-        if (!curr_city) {
-            curr_city = "Sarnia"; // Set default city
-        }
-
-        $('.loading').css('display', 'block');
-
-        $.ajax({
-            url: `https://api.openweathermap.org/data/2.5/weather?q=${curr_city}&appid=${API_KEY}&units=${units}`,
-            method: 'GET',
-            success: function(data) {
-                console.log(data);
-                $(".weather_search_city").html(`${data.name}, ${convertCountryCode(data.sys.country)}`);
-                $(".weather_dateNtime").html(convertTimeStamp(data.dt, data.timezone));
-                $(".forecast_weather").html(`<p>${data.weather[0].main}</p>`);
-                $(".weather_temperature").html(`${data.main.temp.toFixed()}${units === "imperial" ? "&#176F" : "&#176C"}`);
-                $(".icon_weather").html(`<img src="http://openweathermap.org/img/wn/${data.weather[0].icon}.png" alt="Weather Icon"/>`);
-                $(".minMax_weather").html(`<p>H: ${data.main.temp_min.toFixed()}&#176 </p><p>L: ${data.main.temp_max.toFixed()}&#176 </p>`);
-                $(".weather_feels_like").html(`${data.main.feels_like.toFixed()}${units === "imperial" ? "&#176F" : "&#176C"}`);
-                $(".weather_humidity").html(`${data.main.humidity}%`);
-                $(".weather_wind").html(`${data.wind.speed}${units === "imperial" ? "mph" : "m/s"}`);
-                $(".weather_gauge").html(`${data.main.pressure}hpa`);
-                $('.loading').css('display', 'none');
-            },
-            error: function(xhr, status, error) {
-                console.error('Error fetching weather data:', error);
-                if (error.message === 'City not found') {
-                    alert("Invalid city name!");
-                }
-                $('.loading').css('display', 'none');
+    $.ajax({
+        url: `https://api.openweathermap.org/data/2.5/weather?q=${curr_city}&appid=${API_KEY}&units=${units}`,
+        method: 'GET',
+        success: function(data) {
+            console.log(data);
+            $(".weather_search_city").html(`${data.name}, ${convertCountryCode(data.sys.country)}`);
+            $(".weather_dateNtime").html(convertTimeStamp(data.dt, data.timezone));
+            $(".forecast_weather").html(`<p>${data.weather[0].main}</p>`);
+            $(".weather_temperature").html(`${data.main.temp.toFixed()}${units === "imperial" ? "&#176F" : "&#176C"}`);
+            $(".icon_weather").html(`<img src="http://openweathermap.org/img/wn/${data.weather[0].icon}.png" alt="Weather Icon"/>`);
+            $(".minMax_weather").html(`<p>H: ${data.main.temp_min.toFixed()}&#176 </p><p>L: ${data.main.temp_max.toFixed()}&#176 </p>`);
+            $(".weather_feels_like").html(`${data.main.feels_like.toFixed()}${units === "imperial" ? "&#176F" : "&#176C"}`);
+            $(".weather_humidity").html(`${data.main.humidity}%`);
+            $(".weather_wind").html(`${data.wind.speed}${units === "imperial" ? "mph" : "m/s"}`);
+            $(".weather_gauge").html(`${data.main.pressure}hpa`);
+            $('.loading').css('display', 'none');
+        },
+        error: function(xhr, status, error) {
+            console.error('Error fetching weather data:', error);
+            if (error.message === 'City not found') {
+                alert("Invalid city name!");
             }
-        });
-    }
+            $('.loading').css('display', 'none');
+        }
+    });
+}
 
-    // Initial call to fetch default weather data
-    getWeather();
+//Initial call to fetch default weather data
+getWeather();
 });
+
+//Single timer updater function for time, weather and pictures
+function singleTimer() {
+setInterval(() => {
+    getWeather(curr_city);
+}, 60000); 
+
+setInterval(() => {
+    getPhotos(curr_category);
+}, 20000); 
+
+setInterval(() => {
+    updateDateTime();
+}, 1000);
+}
+
+window.onload = singleTimer;
