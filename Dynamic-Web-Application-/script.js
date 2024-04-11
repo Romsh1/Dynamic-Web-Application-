@@ -1,6 +1,6 @@
-// Romika Chaudhary
-// C0921918
-// April 7, 2024
+//Romika Chaudhary
+//C0921918
+//April 7, 2024
 
 //URL and API Key for accessing Unsplash picture
 const API_KEY = '-yVHnIeirZXQo-y9wMRmv11KgXqtuCYWNCH_euSYfPQ';
@@ -27,7 +27,8 @@ function getPhotos(picSearch) {
             console.log(data);
             if (data.results.length > 0) {
                 //Generating random number to display pictures
-                let randNumber = Math.floor(Math.random() * data.results.length);
+                let randNumber = Math.floor(Math.random() * data.results.
+                length);
                 const imageUrl = data.results[randNumber].urls.regular;
                 //Setting the src attribute of the img element
                 $('#placeImage').attr('src', imageUrl); 
@@ -83,29 +84,29 @@ let weatherPressure = document.querySelector(".weather_gauge");
 let loadStatus = document.querySelector(".loading");
 
 $(document).ready(function() {
-    //Search functionality
-    $(".search-weather").on('submit', function(e) {
-        e.preventDefault();
-        let search = $(".weather_searchForm").val();
-        curr_city = search;
+//Search functionality
+$(".search-weather").on('submit', function(e) {
+    e.preventDefault();
+    let search = $(".weather_searchForm").val();
+    curr_city = search;
+    getWeather();
+    $(".weather_searchForm").val("");
+});
+
+//Converting temperature units
+$(".weather_temp_celcius").on('click', function() {
+    if (units !== "metric") {
+        units = "metric";
         getWeather();
-        $(".weather_searchForm").val("");
-    });
+    }
+});
 
-    //Converting temperature units
-    $(".weather_temp_celcius").on('click', function() {
-        if (units !== "metric") {
-            units = "metric";
-            getWeather();
-        }
-    });
-
-    $(".weather_temp_fahrenheit").on('click', function() {
-        if (units !== "imperial") {
-            units = "imperial";
-            getWeather();
-        }
-    });
+$(".weather_temp_fahrenheit").on('click', function() {
+    if (units !== "imperial") {
+        units = "imperial";
+        getWeather();
+    }
+});
 
 function convertTimeStamp(timestamp, timezone) {
     //Converting seconds to hour
